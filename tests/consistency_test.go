@@ -530,7 +530,7 @@ var _ = Describe("Consistency", Ordered, func() {
 func readChecker(check func(*redis.Client)) {
 	// read on leader
 	check(leader)
-	time.Sleep(5000 * time.Millisecond)
+	time.Sleep(10000 * time.Millisecond)
 
 	// read on followers
 	followerChecker(followers, check)
