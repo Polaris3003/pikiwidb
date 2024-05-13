@@ -372,7 +372,7 @@ var _ = Describe("Consistency", Ordered, func() {
 		testValues := []string{"ra", "rb", "rc", "rd"}
 		rpush, err := leader.RPush(ctx, testKey, testValues).Result()
 		Expect(err).NotTo(HaveOccurred())
-		Expect(lpush).To(Equal(int64(len(testValues))))
+		Expect(rpush).To(Equal(int64(len(testValues))))
 		{
 			// RPop on leader
 			rPop, err := leader.RPop(ctx, testKey).Result()
@@ -530,7 +530,7 @@ var _ = Describe("Consistency", Ordered, func() {
 func readChecker(check func(*redis.Client)) {
 	// read on leader
 	check(leader)
-	time.Sleep(10000 * time.Millisecond)
+	time.Sleep(5000 * time.Millisecond)
 
 	// read on followers
 	followerChecker(followers, check)
