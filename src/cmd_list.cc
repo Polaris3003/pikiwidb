@@ -75,6 +75,7 @@ void RPoplpushCmd::DoCmd(PClient* client) {
     client->SetRes(CmdRes::kErrOther, s.ToString());
   }
 }
+
 RPushCmd::RPushCmd(const std::string& name, int16_t arity)
     : BaseCmd(name, arity, kCmdFlagsWrite, kAclCategoryWrite | kAclCategoryList) {}
 
