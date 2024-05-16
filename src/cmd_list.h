@@ -126,10 +126,11 @@ class RPoplpushCmd : public BaseCmd {
   bool DoInitial(PClient* client) override;
 
  private:
+  void DoCmd(PClient* client) override;
+
+ private:
   std::string source_;
   std::string receiver_;
-  std::string value_poped_from_source_;
-  void DoCmd(PClient* client) override;
 };
 
 class LPopCmd : public BaseCmd {
