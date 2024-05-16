@@ -54,7 +54,7 @@ RPoplpushCmd::RPoplpushCmd(const std::string& name, int16_t arity)
     : BaseCmd(name, arity, kCmdFlagsWrite, kAclCategoryWrite | kAclCategoryList) {}
 
 bool RPoplpushCmd::DoInitial(PClient* client) {
-  if(((arity_ > 0 && client->argv_.size() != arity_) || (arity_ < 0 && client->argv_.size() < -arity_))) {
+  if (((arity_ > 0 && client->argv_.size() != arity_) || (arity_ < 0 && client->argv_.size() < -arity_))) {
     client->SetRes(CmdRes::kWrongNum, kCmdNameRPoplpush);
     return false;
   }
@@ -65,8 +65,7 @@ bool RPoplpushCmd::DoInitial(PClient* client) {
 
 void RPoplpushCmd::DoCmd(PClient* client) {
   std::string value;
-  storage::Status s = 
-      PSTORE.GetBackend(client->GetCurrentDB())->GetStorage()->RPoplpush(source_, receiver_, &value);
+  storage::Status s = PSTORE.GetBackend(client->GetCurrentDB())->GetStorage()->RPoplpush(source_, receiver_, &value);
   if (s.ok()) {
     client->AppendString(value);
   } else if (s.IsNotFound()) {
