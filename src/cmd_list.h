@@ -131,6 +131,7 @@ class RPoplpushCmd : public BaseCmd {
  private:
   std::string source_;
   std::string receiver_;
+  std::string value_poped_from_source_;
 };
 
 class LPopCmd : public BaseCmd {
